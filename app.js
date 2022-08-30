@@ -1,7 +1,18 @@
-const loadPhone = async (name,dataLimit) => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${name}`)
-    const data = await res.json()
-    fullPhone(data.data, dataLimit)
+let phn;
+const loadPhone = async (name, dataLimit) => {
+    if (name) {
+        const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${name}`)
+        
+        const data = await res.json()
+        fullPhone(data.data, dataLimit)
+    }
+    else {
+        console.log(phn)
+        const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${phn}`)
+        console.log(name)
+        const data = await res.json()
+        fullPhone(data.data, dataLimit)
+    }
 
 }
 
@@ -26,10 +37,11 @@ const fullPhone = (phones, dataLimit) => {
     else {
         notFound.classList.add('d-none')
     }
-    console.log(phones)
+    // console.log(phones)
+
     phones.forEach(phone => {
         // showing 6 phone in one search
-        const {brand, phone_name, image}=phone
+        const {slug, phone_name, image}=phone
         const div = document.createElement('div')
         div.classList.add('col')
         div.innerHTML = `
@@ -39,8 +51,8 @@ const fullPhone = (phones, dataLimit) => {
               <h5 class="card-title">${phone_name}</h5>
               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetailsModal" onclick="phoneDetails(id)">
-                Launch demo modal
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetailsModal" onclick="phoneDetails('${slug}')">
+                View Details
               </button>
             </div>
         </div>
@@ -55,6 +67,9 @@ const displayProducts = (dataLimit) => {
     spinner(true)
     const searchField = document.getElementById('search-field')
     const searchText = searchField.value 
+    if (searchText) {
+        phn = searchText
+    }
     searchField.value = ``
     loadPhone(searchText, dataLimit)
     console.log(dataLimit)
@@ -85,3 +100,15 @@ const spinner = (isLoading) => {
 
 
 // loadPhone('a')
+// phone details displaying function
+const phoneDetails = async (id) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`) 
+    const data = await res.json()
+    displayDetails(data.data)
+}
+const displayDetails = (features) => {
+    console.log(features)
+    const { mainFeatures, brand, name, releaseDate,image } = features
+    const { storage,chipSet,displaySize,sensors } = mainFeatures
+    console.log(storage,image,sensors)
+}
