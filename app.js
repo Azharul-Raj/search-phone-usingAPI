@@ -108,7 +108,11 @@ const phoneDetails = async (id) => {
 }
 const displayDetails = (features) => {
     console.log(features)
+    // let sensorList;
     const { mainFeatures, brand, name, releaseDate,image } = features
-    const { storage,chipSet,displaySize,sensors } = mainFeatures
-    console.log(storage,image,sensors)
+    const { storage, chipSet, displaySize, sensors } = mainFeatures
+    const [a,b,c,d] = sensors
+    console.log(storage, image, sensors, a)
+    
+    
 }
