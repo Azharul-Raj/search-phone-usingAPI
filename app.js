@@ -8,7 +8,15 @@ const loadPhone = async (name) => {
 const fullPhone = (phones) => {
     const displayPhone = document.getElementById('display-phone')
     displayPhone.textContent = ``
-    phones = phones.slice(0, 6)
+    // display button if products is more than 6
+    const showAll = document.getElementById('load-more')
+    if (phones.length > 6) {
+        phones = phones.slice(0, 6)
+        showAll.classList.remove(`d-none`)
+    }
+    else {
+        showAll.classList.add(`d-none`)
+    }
     
     // not found condition
     const notFound = document.getElementById('not-found')
@@ -38,13 +46,19 @@ const fullPhone = (phones) => {
     spinner(false)
 }
 
-// add click event handler
-document.getElementById('search-btn').addEventListener('click', function () {
-    spinner(true)
+// product displaying function start
+const displayProducts = () => {
     const searchField = document.getElementById('search-field')
     const searchText = searchField.value 
     searchField.value = ``
     loadPhone(searchText)
+}
+// product displaying function end
+
+// add click event handler
+document.getElementById('search-btn').addEventListener('click', function () {
+    spinner(true)
+    displayProducts()
 })
 
 
