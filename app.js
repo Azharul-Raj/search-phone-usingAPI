@@ -8,8 +8,19 @@ const loadPhone = async (name) => {
 const fullPhone = (phones) => {
     const displayPhone = document.getElementById('display-phone')
     displayPhone.textContent = ``
+    phones = phones.slice(0, 6)
+    
+    // not found condition
+    const notFound = document.getElementById('not-found')
+    if (phones.length === 0) {
+        notFound.classList.remove('d-none')
+    }
+    else {
+        notFound.classList.add('d-none')
+    }
     console.log(phones)
     phones.forEach(phone => {
+        // showing 6 phone in one search
         const {brand, phone_name, image}=phone
         const div = document.createElement('div')
         div.classList.add('col')
