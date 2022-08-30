@@ -35,15 +35,29 @@ const fullPhone = (phones) => {
         `
         displayPhone.appendChild(div)
     })
+    spinner(false)
 }
+
 // add click event handler
 document.getElementById('search-btn').addEventListener('click', function () {
+    spinner(true)
     const searchField = document.getElementById('search-field')
     const searchText = searchField.value 
     searchField.value = ``
     loadPhone(searchText)
 })
 
+
+// spinner loading function
+const spinner = (isLoading) => {
+    const spinnerSection = document.getElementById('spinner')
+    if (isLoading) {
+        spinnerSection.classList.remove('d-none')
+    }
+    else {
+        spinnerSection.classList.add('d-none')
+    }
+}
 
 
 // loadPhone('a')
