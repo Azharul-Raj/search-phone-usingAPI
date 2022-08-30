@@ -7,6 +7,7 @@ const loadPhone = async (name) => {
 
 const fullPhone = (phones) => {
     const displayPhone = document.getElementById('display-phone')
+    displayPhone.textContent = ``
     console.log(phones)
     phones.forEach(phone => {
         const {brand, phone_name, image}=phone
