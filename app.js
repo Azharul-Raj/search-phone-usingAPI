@@ -1,16 +1,16 @@
-const loadPhone = async (name) => {
+const loadPhone = async (name,dataLimit) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${name}`)
     const data = await res.json()
-    fullPhone(data.data)
+    fullPhone(data.data, dataLimit)
 
 }
 
-const fullPhone = (phones) => {
+const fullPhone = (phones, dataLimit) => {
     const displayPhone = document.getElementById('display-phone')
     displayPhone.textContent = ``
     // display button if products is more than 6
     const showAll = document.getElementById('load-more')
-    if (phones.length > 6) {
+    if (dataLimit && phones.length > 6) {
         phones = phones.slice(0, 6)
         showAll.classList.remove(`d-none`)
     }
@@ -38,6 +38,10 @@ const fullPhone = (phones) => {
             <div class="card-body">
               <h5 class="card-title">${phone_name}</h5>
               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetailsModal" onclick="phoneDetails(id)">
+                Launch demo modal
+              </button>
             </div>
         </div>
         `
@@ -47,20 +51,26 @@ const fullPhone = (phones) => {
 }
 
 // product displaying function start
-const displayProducts = () => {
+const displayProducts = (dataLimit) => {
+    spinner(true)
     const searchField = document.getElementById('search-field')
     const searchText = searchField.value 
     searchField.value = ``
-    loadPhone(searchText)
+    loadPhone(searchText, dataLimit)
+    console.log(dataLimit)
 }
 // product displaying function end
 
 // add click event handler
 document.getElementById('search-btn').addEventListener('click', function () {
-    spinner(true)
+    
+    displayProducts(6)
+})
+// show all btn event handler
+document.getElementById(`load-more-btn`).addEventListener('click', function () {
+    
     displayProducts()
 })
-
 
 // spinner loading function
 const spinner = (isLoading) => {
