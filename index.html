@@ -10,12 +10,14 @@
 </head>
 <body>
     <header>
-        <h2>Search Phone By Name</h2>
+        <h2 class="text-center">Search Phone By Name</h2>
     </header>
     <main class="container">
         <section>
+            <div class="text-center">
             <input type="text" name="" id="search-field" class="w-50" placeholder="Search Your Phone">
             <button id="search-btn" class="btn btn-primary">Search</button>
+            </div>
             <div class="mt-5">
                 <div id="display-phone" class="row row-cols-1 row-cols-md-3 g-4">
                     
@@ -24,6 +26,13 @@
                     <h1>No Phone Found. Try Again</h1>
                 </div>
             </div>
+        </section>
+        <section id="spinner">
+            <div style="height: 500px;" class="d-flex justify-content-center text-success align-items-center">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
         </section>
     </main>
     <!-- javascript added -->
