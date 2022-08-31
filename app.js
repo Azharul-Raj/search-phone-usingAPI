@@ -99,7 +99,7 @@ const spinner = (isLoading) => {
 }
 
 
-// loadPhone('a')
+loadPhone('a')
 // phone details displaying function
 const phoneDetails = async (id) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`) 
