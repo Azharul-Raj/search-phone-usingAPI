@@ -113,6 +113,27 @@ const displayDetails = (features) => {
     const { storage, chipSet, displaySize, sensors } = mainFeatures
     const [a,b,c,d] = sensors
     console.log(storage, image, sensors, a)
-    
-    
+    const modalDisplay = document.getElementById('modal-display')
+    modalDisplay.innerHTML = `
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="phoneDetailsModalLabel">${name}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex">
+          <div><img src="${image}" alt=""></div>
+          <div class="mx-5">
+          <p class="fw-bold text-uppercase">${brand}</p>
+          <p><span class="fw-bold text-uppercase">Sensors: </span>${a},${b},${c},${d}</p>
+          <p><span class="fw-bold text-uppercase">Relase : </span>${releaseDate}</p>
+          <p><span class="fw-bold text-uppercase">Storage: </span>${storage}</p>
+          <p><span class="fw-bold text-uppercase">Chip : </span>${chipSet}</p>
+          <p><span class="fw-bold text-uppercase">Display : </span>${displaySize}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
+
 }
